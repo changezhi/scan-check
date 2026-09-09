@@ -77,9 +77,15 @@
   .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:rgba(18,48,63,.94);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:200;box-shadow:var(--shadow);}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   @keyframes rise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
+.env-tip{position:fixed;top:0;left:0;right:0;z-index:9999;background:#fff4e5;color:#9a4a00;font-size:13px;line-height:1.6;padding:10px 14px;border-bottom:1px solid #ffd9a8;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.env-tip-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.env-tip-close{flex:0 0 auto;border:none;background:#ff8c1a;color:#fff;border-radius:14px;padding:5px 12px;font-size:12px;cursor:pointer}
 </style>
 </head>
 <body data-page-node-id="uGxakUHod4YJ16REJscW3m">
+<div id="envTip" class="env-tip" hidden>
+  <div class="env-tip-inner"><span id="envTipText"></span><button id="envTipClose" class="env-tip-close">知道了</button></div>
+</div>
 <div class="app" data-page-node-id="bTjQo0JAHB3LNH2sLRah9Z">
   <header data-page-node-id="M6zEomiJe5GAAvclLmDW8Z">
     <h1 data-page-node-id="12jk4GOpxPvb5Wx0ugsCLY">设备点检<small data-page-node-id="v5p983EcznirzPpLkHErx3">MONTHLY INSPECTION</small></h1>
@@ -224,6 +230,24 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 
   loadRemote();
 
+  // 环境提示：微信内置浏览器无法调用摄像头
+  (function(){
+    var tip=document.getElementById('envTip'), txt=document.getElementById('envTipText');
+    if(!tip) return;
+    var ua=navigator.userAgent||'';
+    var isWechat=/MicroMessenger/i.test(ua);
+    var noCam=!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia;
+    if(isWechat){
+      txt.textContent='检测到在微信内打开：微信内置浏览器无法调用摄像头，请点右上角「···」→「在浏览器中打开」后再扫描。';
+      tip.hidden=false;
+    }else if(noCam){
+      txt.textContent='当前浏览器无法调用摄像头（需通过 HTTPS 或 localhost 打开）。请用手机自带浏览器打开本页。';
+      tip.hidden=false;
+    }
+    var ec=document.getElementById('envTipClose');
+    if(ec) ec.onclick=function(){ tip.hidden=true; };
+  })();
+
   var listEl=document.getElementById('items');
   var totalEl=document.getElementById('total');
   var toastEl=document.getElementById('toast');
@@ -289,6 +313,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   }
   function openScanner(){
     if(typeof Html5Qrcode==='undefined'){ toast('扫码组件加载失败，请联网后重试'); return; }
+    if(/MicroMessenger/i.test(navigator.userAgent)){ toast('微信内浏览器无法调用摄像头：请点右上角「···」→「在浏览器中打开」后用浏览器扫描'); return; }
     if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
       toast('当前环境无法调用摄像头：请用 HTTPS 或 http://localhost 打开；手机访问 http://内网IP 会被拦截，微信内请点右上角“在浏览器中打开”');
       return;
