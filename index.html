@@ -157,6 +157,73 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   var KEY='dc_record_v1';
   var records=[]; try{ records=JSON.parse(localStorage.getItem(KEY)||'[]'); if(!Array.isArray(records)) records=[]; }catch(e){ records=[]; }
 
+  /* ===== 共享数据：GitHub 仓库当数据库（多人看到同一份记录） ===== */
+  var GH_REPO='changezhi/scan-check';
+  var GH_TOKEN='<在此替换为仅限 scan-check 仓库的 fine-grained token，需 Contents 读写权限>';
+  var GH_DATA='records.json';
+  var GH_BRANCH='main';
+  var GH_API='https://api.github.com';
+  var GH_RAW='https://raw.githubusercontent.com/'+GH_REPO+'/'+GH_BRANCH+'/'+GH_DATA;
+  var SYNC_RETRY=0;
+
+  function b64enc(s){ return btoa(unescape(encodeURIComponent(s))); }
+  function b64dec(s){ try{ return decodeURIComponent(escape(atob(s))); }catch(e){ return ''; } }
+
+  // 启动：从 raw 读取共享记录（免 token）
+  function loadRemote(){
+    fetch(GH_RAW,{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.text(); })
+      .then(function(t){ var a=JSON.parse(t||'[]'); if(Array.isArray(a)&&a.length){ records=a; save(); render(); } })
+      .catch(function(){});
+  }
+
+  // 读-改-写：拉最新 -> 合并本地新增 -> 提交（处理并发 409 重试）
+  function syncRemote(){
+    if(!GH_TOKEN || GH_TOKEN.indexOf('<')===0){ toast('未配置 GitHub token，仅本地保存'); save(); return; }
+    fetch(GH_API+'/repos/'+GH_REPO+'/contents/'+GH_DATA,{headers:{'Authorization':'token '+GH_TOKEN}})
+      .then(function(r){
+        if(r.status===404) return {needCreate:true, sha:null, arr:[]};
+        return r.json().then(function(j){ return {needCreate:false, sha:(j&&j.sha)||null, arr:(j&&j.content)?JSON.parse(b64dec(j.content)):[]}; });
+      })
+      .then(function(st){
+        var base=Array.isArray(st.arr)?st.arr:[];
+        var seen={}; base.forEach(function(r){ seen[r.code+'|'+r.time]=1; });
+        records.forEach(function(r){ if(!seen[r.code+'|'+r.time]) base.push(r); });
+        records=base; save(); render();
+        var payload={message:'点检记录更新', content:b64enc(JSON.stringify(records))};
+        if(st.sha) payload.sha=st.sha;
+        return fetch(GH_API+'/repos/'+GH_REPO+'/contents/'+GH_DATA,{
+          method: st.needCreate?'POST':'PUT',
+          headers:{'Authorization':'token '+GH_TOKEN,'Content-Type':'application/json'},
+          body: JSON.stringify(payload)
+        });
+      })
+      .then(function(r){
+        if(r && r.status===409 && SYNC_RETRY<3){ SYNC_RETRY++; return syncRemote(); }
+        if(r && !r.ok) toast('同步失败，已保留本地数据');
+        SYNC_RETRY=0;
+      })
+      .catch(function(){ toast('同步失败，已保留本地数据'); SYNC_RETRY=0; });
+  }
+
+  // 清空共享记录
+  function clearRemote(){
+    if(!GH_TOKEN || GH_TOKEN.indexOf('<')===0){ records=[]; save(); render(); toast('已清空（仅本地）'); return; }
+    fetch(GH_API+'/repos/'+GH_REPO+'/contents/'+GH_DATA,{headers:{'Authorization':'token '+GH_TOKEN}})
+      .then(function(r){ return r.json().then(function(j){ return (j&&j.sha)||null; }); })
+      .then(function(sha){
+        if(!sha) return;
+        return fetch(GH_API+'/repos/'+GH_REPO+'/contents/'+GH_DATA,{
+          method:'PUT',
+          headers:{'Authorization':'token '+GH_TOKEN,'Content-Type':'application/json'},
+          body: JSON.stringify({message:'清空点检记录', content:b64enc('[]'), sha:sha})
+        });
+      })
+      .then(function(){ records=[]; save(); render(); toast('已清空共享记录'); })
+      .catch(function(){ toast('清空失败，已保留本地'); });
+  }
+
+  loadRemote();
+
   var listEl=document.getElementById('items');
   var totalEl=document.getElementById('total');
   var toastEl=document.getElementById('toast');
@@ -190,7 +257,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     if(!code){ toast('未识别到条码内容'); return; }
     var time=time||nowStr();
     records.push({code:code,time:time,status:status||'正常',note:note||''});
-    save(); render();
+    save(); syncRemote();
     toast('已记录：'+code+'（第 '+records.length+' 台）');
   }
 
@@ -274,7 +341,7 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 
   document.getElementById('clearBtn').addEventListener('click',function(){
     if(!records.length){ toast('已无记录'); return; }
-    if(confirm('确定清空本次所有点检记录？')){ records=[]; save(); render(); toast('已清空'); }
+    if(confirm('确定清空所有共享点检记录？（所有人都会看到清空）')){ clearRemote(); }
   });
 
   render();
