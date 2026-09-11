@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-page-node-id="Ripoqv68kuWkcU31Rq5CJR">
-<head data-page-node-id="XyyqDAP5m4bV2i0rpma44g">
-<meta charset="UTF-8" data-page-node-id="PxG49Ir0Ahh6ahes8Y06x3">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="YAyEyYmFhNGCWpTpHNBtnh">
-<meta name="theme-color" content="#0f2a3d" data-page-node-id="FRcz8FEilOYPRExqHkwyxZ">
+<html lang="zh-CN" data-page-node-id="JAQCyYSIs3reQKUaXgx5GT">
+<head data-page-node-id="kL7CZjKuHtwDCNHvBzXTZ6">
+<meta charset="UTF-8" data-page-node-id="JrZhPY9iWtVDmCQC0kU8H1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" data-page-node-id="sbZ9WEeln7Ld74c9pCXK1H">
+<meta name="theme-color" content="#0f2a3d" data-page-node-id="rCpf3bE06cJhasrHjcjHTF">
 <title>设备点检 · 扫码记录</title>
 <style>
   :root{
@@ -77,56 +77,49 @@
   .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);background:rgba(18,48,63,.94);color:#fff;padding:12px 20px;border-radius:12px;font-size:14px;opacity:0;pointer-events:none;transition:all .25s;z-index:200;box-shadow:var(--shadow);}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
   @keyframes rise{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:none;}}
-.env-tip{position:fixed;top:0;left:0;right:0;z-index:9999;background:#fff4e5;color:#9a4a00;font-size:13px;line-height:1.6;padding:10px 14px;border-bottom:1px solid #ffd9a8;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.env-tip-inner{max-width:560px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
-.env-tip-close{flex:0 0 auto;border:none;background:#ff8c1a;color:#fff;border-radius:14px;padding:5px 12px;font-size:12px;cursor:pointer}
 </style>
 </head>
-<body data-page-node-id="uGxakUHod4YJ16REJscW3m">
-<div id="envTip" class="env-tip" hidden>
-  <div class="env-tip-inner"><span id="envTipText"></span><button id="envTipClose" class="env-tip-close">知道了</button></div>
-</div>
-<div class="app" data-page-node-id="bTjQo0JAHB3LNH2sLRah9Z">
-  <header data-page-node-id="M6zEomiJe5GAAvclLmDW8Z">
-    <h1 data-page-node-id="12jk4GOpxPvb5Wx0ugsCLY">设备点检<small data-page-node-id="v5p983EcznirzPpLkHErx3">MONTHLY INSPECTION</small></h1>
-    <div class="count-badge" data-page-node-id="C6tF8H1cGFu0VItLcBzF8i">已检 <b id="total" data-page-node-id="VELHlwWSelJCjvmXvXodC6">0</b> 台</div>
+<body data-page-node-id="ZwokcQ7R5I3a1JNAG1GwvV">
+<div class="app" data-page-node-id="BxrcA25YyaNu7eJq4elBVt">
+  <header data-page-node-id="hkGE7lYkVNf5QMLnbLbRIg">
+    <h1 data-page-node-id="GoMr42vOSYb8UxMQC0ggbo">设备点检<small data-page-node-id="uxy6KzSERO6xFTTOdwupbg">MONTHLY INSPECTION</small></h1>
+    <div class="count-badge" data-page-node-id="AphJVtWNtiG5mfkGvWIpZi">已检 <b id="total" data-page-node-id="wPxdKWFsyTpIdkBUtSw1fB">0</b> 台</div>
   </header>
-  <button class="scan-btn" id="scanBtn" data-page-node-id="Vc8oi4BeXBMTvUoeyKMEDf"><span class="ic" data-page-node-id="n4JBmjFM4ufq5eAR88lUFi">◉</span> 扫描设备条码</button>
-  <section class="manual" data-page-node-id="x7vchTbDMn37nW8SCcWtUz">
-    <h2 data-page-node-id="vByBpkdPRabQzOvF0rztaN">手动补录（无需扫码，可选）</h2>
-    <fieldset data-page-node-id="jKCqKZray8BsFjlLHCObCu">
-      <input id="mCode" type="text" placeholder="设备编号 / 条码内容" data-page-node-id="X61bHd3yW8jaacvAdeAy0Y">
-      <div class="row" data-page-node-id="2Hr7XdOSu0vvJhDiMNYYw2">
-        <input id="mSnap" readonly placeholder="点击右侧获取时间" data-page-node-id="eZgMjWrnPsJaxX6jyoL3pQ">
-        <button class="mini-btn" id="snapBtn" data-page-node-id="YRyPPIlE7GdHV8qkt6mxMy">⌁</button>
+  <button class="scan-btn" id="scanBtn" data-page-node-id="bajVnX7DA1fudsTAfmry71"><span class="ic" data-page-node-id="jf7uVI6UY9h9qcGAZKYck6">◉</span> 扫描设备条码</button>
+  <section class="manual" data-page-node-id="jCqgi4vbSI5akdSlL1Ci5U">
+    <h2 data-page-node-id="MaMe2OCldG9kzpAfEnPQ0Q">手动补录（无需扫码，可选）</h2>
+    <fieldset data-page-node-id="MjSdkc5xX9nadtBN4NbeBz">
+      <input id="mCode" type="text" placeholder="设备编号 / 条码内容" data-page-node-id="4dbbbUOnB4y8ik97ryxumB">
+      <div class="row" data-page-node-id="8l6ruVhEvy4ymSx2ahcaCN">
+        <input id="mSnap" readonly placeholder="点击右侧获取时间" data-page-node-id="qei9CQKSjPHMC7uSaruGKa">
+        <button class="mini-btn" id="snapBtn" data-page-node-id="lDenZBb4aD9IvbkMmilXTE">⌁</button>
       </div>
-      <select id="mStatus" data-page-node-id="cNyq9fy7sqDr5gBjJqydz1">
-        <option value="正常" data-page-node-id="BRv3IgIFM1VCo3wujFqc9b">状态：正常</option>
-        <option value="异常" data-page-node-id="boT3tizJmHRlIWxECe51MG">状态：异常</option>
-        <option value="待维修" data-page-node-id="q30iP1LeoBfrQsbMaB3LTL">状态：待维修</option>
+      <select id="mStatus" data-page-node-id="Ijxd5CivVC78J727137NhN">
+        <option value="正常" data-page-node-id="HzrhCWWVOixBw2zjFgG9qm">状态：正常</option>
+        <option value="异常" data-page-node-id="xTsgDkQtzAbK8sO41Vax4a">状态：异常</option>
+        <option value="待维修" data-page-node-id="iJCx2ykDg4nKnpIcXDW8tH">状态：待维修</option>
       </select>
-      <input id="mNote" type="text" placeholder="备注（可选，如故障描述）" data-page-node-id="DXAuUAzSPC6JSyIWpA3Hwu">
-      <button class="add-btn" id="manualBtn" data-page-node-id="n8UGcYBWMP1okcp3BpZ67x">＋ 添加记录</button>
+      <input id="mNote" type="text" placeholder="备注（可选，如故障描述）" data-page-node-id="EEnCL3Og4jhBieIrrWCwqy">
+      <button class="add-btn" id="manualBtn" data-page-node-id="ktQjbgc2aRxRGCGYCBG3c1">＋ 添加记录</button>
     </fieldset>
   </section>
-  <section class="list" data-page-node-id="hzaPj1O4wZ1eh9OkkNzX1J">
-    <div class="list-head" data-page-node-id="bre8YHuwCn9VKpLR6VrqyV"><span data-page-node-id="pDLjVzVdnF68WhuxShoEgt">本次点检记录</span></div>
-    <div id="items" data-page-node-id="D07SPXffeWAhIntj0CrEOQ"></div>
+  <section class="list" data-page-node-id="W5LE3r5Kt1fnlSiKlnhiPr">
+    <div class="list-head" data-page-node-id="sPqVItXsbGO9vj0ViUBu6f"><span data-page-node-id="DmUZ0B23Q8iNi2Up5mBArm">本次点检记录</span></div>
+    <div id="items" data-page-node-id="hv4rMTSGYhbhWVCoGphEKa"></div>
   </section>
 </div>
-<div class="bar" data-page-node-id="Y2jWFuVzvvkZPIOHOgkx2c">
-  <div class="bar-inner" data-page-node-id="wfL734TSWSzb16IcImPjiA">
-    <button class="btn-export" id="exportBtn" disabled data-page-node-id="up2SMCQnf6Jn0BwKWLMvoK">导出 Excel</button>
-    <button class="btn-clear" id="clearBtn" data-page-node-id="GuGoComyWZKB7iZZCDF3Sd">清空</button>
+<div class="bar" data-page-node-id="4nYpPcLbPeBGoVpayeJWBc">
+  <div class="bar-inner" data-page-node-id="FnokiaP3OcJwc7rCQb0a3q">
+    <button class="btn-export" id="exportBtn" disabled data-page-node-id="XsipDU8urJKAnkPXxd76Pj">导出 Excel</button>
+    <button class="btn-clear" id="clearBtn" data-page-node-id="xEC85QZHkBDP047il1KeMV">清空</button>
   </div>
 </div>
-<div id="scanner" data-page-node-id="xSIVUSqSvcB7dFcHlFY1A1">
-  <div class="scan-bar" data-page-node-id="SanekvCNOaCOlIvxh0GqUR">请对准设备条码</div>
-  <button class="close" id="closeScan" data-page-node-id="B30DpBGMrVg3tHem7XzS4i">✕</button>
-  <select id="cameraSelect" style="position:absolute;top:14px;left:14px;z-index:11;padding:6px 10px;border:none;border-radius:8px;font-size:13px;background:rgba(255,255,255,.92);color:#12303f;display:none;max-width:60%;" data-page-node-id="txp93k7Gpho00oq5nIfLfy"></select>
-  <div id="qr-reader" data-page-node-id="faQZ0x6GZsz3YGVRrSyFjD"></div>
+<div id="scanner" data-page-node-id="bhKhb1ohy3c1qgbWEw0on2">
+  <div class="scan-bar" data-page-node-id="8cw5c9P14AQpFWcLJuhkY2">请对准设备条码</div>
+  <button class="close" id="closeScan" data-page-node-id="QiCnVbC88u2o27Jsl2htc7">✕</button>
+  <div id="qr-reader" data-page-node-id="PyWyonfJVMEWiUbp6EI9NO"></div>
 </div>
-<div class="toast" id="toast" data-page-node-id="aEK03hwzwOjjvINnzX2P6d"></div>
+<div class="toast" id="toast" data-page-node-id="aI3NJn43n5SpnpZQ2pPIZV"></div>
 
 <script>
 /*=== html5-qrcode lib inline ===*/
@@ -163,87 +156,6 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   var KEY='dc_record_v1';
   var records=[]; try{ records=JSON.parse(localStorage.getItem(KEY)||'[]'); if(!Array.isArray(records)) records=[]; }catch(e){ records=[]; }
 
-  /* ===== 共享数据：经微信云托管代理读写 GitHub records.json（token 只在服务端，前端零暴露） ===== */
-  var PROXY='https://express-wn7e-311340-12-1302377331.sh.run.tcloudbase.com';
-
-  // 云端记录 -> 本页格式
-  function normalize(r){
-    return {
-      code:String(r.code||''),
-      time:String(r.createTime||r.time||''),
-      status:(r.result==='异常'?'异常':'正常'),
-      note:String(r.remark||r.note||'')
-    };
-  }
-
-  // 启动/刷新：从代理拉取共享记录（免 token，服务端持有）
-  function loadRemote(){
-    fetch(PROXY+'/records',{cache:'no-store'}).then(function(r){ if(!r.ok) throw 0; return r.json(); })
-      .then(function(j){
-        if(j && j.ok && Array.isArray(j.records)){
-          records=j.records.map(normalize).filter(function(r){ return r.code; });
-          save(); render();
-        }
-      })
-      .catch(function(){});
-  }
-
-  // 把本地记录逐条 POST 给代理（服务端按 code+createTime 去重，重复提交无副作用）
-  function pushOne(list, done){
-    if(!list.length){ if(done) done(true); return; }
-    var r=list[0];
-    fetch(PROXY+'/records',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({code:r.code, createTime:r.time, result:r.status, remark:r.note})
-    }).then(function(res){
-      if(!res.ok && res.status!==409) throw 0;
-      return res.json().catch(function(){ return {}; });
-    }).then(function(){
-      list.shift(); pushOne(list, done);
-    }).catch(function(){
-      if(done) done(false);
-    });
-  }
-
-  function syncRemote(){
-    pushOne(records.slice(), function(ok){
-      if(ok){ loadRemote(); }
-      else{ toast('同步失败，已保留本地数据'); }
-    });
-  }
-
-  // 清空共享记录
-  function clearRemote(){
-    fetch(PROXY+'/records',{method:'DELETE'})
-      .then(function(r){ return r.json(); })
-      .then(function(j){
-        if(j && j.ok){ records=[]; save(); render(); toast('已清空共享记录'); }
-        else{ toast('清空失败：'+((j&&j.error)||'未知错误')); }
-      })
-      .catch(function(){ toast('清空失败，已保留本地'); });
-  }
-
-  loadRemote();
-
-  // 环境提示：微信内置浏览器无法调用摄像头
-  (function(){
-    var tip=document.getElementById('envTip'), txt=document.getElementById('envTipText');
-    if(!tip) return;
-    var ua=navigator.userAgent||'';
-    var isWechat=/MicroMessenger/i.test(ua);
-    var noCam=!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia;
-    if(isWechat){
-      txt.textContent='检测到在微信内打开：微信内置浏览器无法调用摄像头，请点右上角「···」→「在浏览器中打开」后再扫描。';
-      tip.hidden=false;
-    }else if(noCam){
-      txt.textContent='当前浏览器无法调用摄像头（需通过 HTTPS 或 localhost 打开）。请用手机自带浏览器打开本页。';
-      tip.hidden=false;
-    }
-    var ec=document.getElementById('envTipClose');
-    if(ec) ec.onclick=function(){ tip.hidden=true; };
-  })();
-
   var listEl=document.getElementById('items');
   var totalEl=document.getElementById('total');
   var toastEl=document.getElementById('toast');
@@ -260,14 +172,40 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
   var toastT=null;
   function toast(msg){ toastEl.textContent=msg; toastEl.classList.add('show'); clearTimeout(toastT); toastT=setTimeout(function(){ toastEl.classList.remove('show'); },1800); }
 
-  function esc(s){ return (''+(s==null?'':s)).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+  /* ===== SQLite 云端同步（经微信云托管代理，服务端写入 SQLite；断网仍存本机，联网自动补传） ===== */
+  var PROXY='https://express-wn7e-311340-12-1302377331.sh.run.tcloudbase.com';
+
+  function recKey(r){ return (r.code||'')+'|'+(r.time||''); }
+  function toCloud(r){ return { code:r.code, createTime:r.time, result:r.status, remark:r.note }; }
+  function fromCloud(c){ return { code:c.code||'', time:c.createTime||c.time||'', status:(c.result==='异常'?'异常':'正常'), note:c.remark||c.note||'' }; }
+
+  // 打开页面/刷新：从 SQLite 拉取共享记录并合并本机，再把本机独有的补传上去
+  function loadRemote(){
+    fetch(PROXY+'/records',{cache:'no-store'})
+      .then(function(r){ if(!r.ok) throw 0; return r.json(); })
+      .then(function(j){
+        if(!j || !j.ok || !Array.isArray(j.records)) return;
+        var seen={}; j.records.forEach(function(x){ seen[recKey(x)]=1; });
+        var cloud=j.records.map(fromCloud);
+        records.forEach(function(x){ if(!seen[recKey(x)]) cloud.push(x); });
+        records=cloud; save(); render();
+        var todo=records.filter(function(x){ return !seen[recKey(x)]; });
+        (function next(){
+          if(!todo.length) return;
+          var r=todo.shift();
+          fetch(PROXY+'/records',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(toCloud(r))}).then(next).catch(next);
+        })();
+      })
+      .catch(function(){});
+  }
+
   function render(){
     totalEl.textContent=records.length;
     document.getElementById('exportBtn').disabled = records.length===0;
     if(!records.length){ listEl.innerHTML='<div class="empty"><span class="big">◌</span>还没有点检记录<br>点击上方按钮开始扫码</div>'; return; }
     var h='';
     records.forEach(function(r,i){
-      h+='<div class="item"><div class="idx">'+(i+1)+'</div><div class="body"><div class="code">'+esc(r.code)+'</div><div class="meta"><span>时刻：'+esc(r.time)+'</span><span>状态：'+esc(r.status)+(r.note?' · '+esc(r.note):'')+'</span></div></div><div class="status-dot"></div></div>';
+      h+='<div class="item"><div class="idx">'+(i+1)+'</div><div class="body"><div class="code">'+r.code+'</div><div class="meta"><span>时刻：'+r.time+'</span><span>状态：'+r.status+(r.note?' · '+r.note:'')+'</span></div></div><div class="status-dot"></div></div>';
     });
     listEl.innerHTML=h;
   }
@@ -277,8 +215,10 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     if(!code){ toast('未识别到条码内容'); return; }
     var time=time||nowStr();
     records.push({code:code,time:time,status:status||'正常',note:note||''});
-    save(); syncRemote();
+    save(); render();
     toast('已记录：'+code+'（第 '+records.length+' 台）');
+    // 同步到 SQLite（失败不影响本机，联网后 loadRemote 会自动补传）
+    try{ fetch(PROXY+'/records',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(toCloud({code:code,time:time,status:status||'正常',note:note||''}))}).catch(function(){}); }catch(e){}
   }
 
   document.getElementById('scanBtn').addEventListener('click',openScanner);
@@ -286,52 +226,18 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
     if(html5Qr){ try{ html5Qr.stop().catch(function(){}).then(function(){ html5Qr.clear().catch(function(){}); }); }catch(e){} html5Qr=null; }
     scanning=false; scannerEl.classList.remove('active');
   }
-  function camConstraint(){
-    var sel=document.getElementById('cameraSelect'), d=sel&&sel.value;
-    return d?{deviceId:{exact:d}}:{facingMode:'environment'};
-  }
-  function fillCameras(){
-    if(!navigator.mediaDevices||!navigator.mediaDevices.enumerateDevices) return;
-    navigator.mediaDevices.enumerateDevices().then(function(list){
-      var vids=list.filter(function(x){return x.kind==='videoinput';});
-      var sel=document.getElementById('cameraSelect');
-      if(vids.length>1){
-        sel.innerHTML=vids.map(function(x,i){return '<option value="'+x.deviceId+'">摄像头'+(i+1)+(x.label?'（'+x.label+'）':'')+'</option>';}).join('');
-        sel.style.display='block';
-      }
-    }).catch(function(){});
-  }
-  var decodedOnce=false;
-  function onDecoded(text){ if(decodedOnce) return; decodedOnce=true; addRecord(text,'正常',''); closeScanner(); }
-  function startScan(){
-    if(!html5Qr) html5Qr=new Html5Qrcode('qr-reader');
-    return html5Qr.start(camConstraint(),{fps:10,qrbox:{width:240,height:240}},onDecoded,function(){});
-  }
   function openScanner(){
     if(typeof Html5Qrcode==='undefined'){ toast('扫码组件加载失败，请联网后重试'); return; }
-    if(/MicroMessenger/i.test(navigator.userAgent)){ toast('微信内浏览器无法调用摄像头：请点右上角「···」→「在浏览器中打开」后用浏览器扫描'); return; }
-    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){
-      toast('当前环境无法调用摄像头：请用 HTTPS 或 http://localhost 打开；手机访问 http://内网IP 会被拦截，微信内请点右上角“在浏览器中打开”');
-      return;
-    }
-    decodedOnce=false;
     scannerEl.classList.add('active');
-    fillCameras();
-    var sel=document.getElementById('cameraSelect');
-    sel.onchange=function(){ if(!scanning) return; closeScanner(); startScan().then(function(){scanning=true;},function(e){scanFail(e);}); };
-    startScan().then(function(){ scanning=true; },function(e){
-      var msg=(e&&e.message)?e.message:(''+e);
-      if(msg.indexOf('NotFound')>-1||(e&&e.name==='NotFoundError')){
-        try{ html5Qr.stop().catch(function(){}).then(function(){ html5Qr.clear().catch(function(){}); }); }catch(err){}
-        html5Qr=new Html5Qrcode('qr-reader');
-        html5Qr.start({},{fps:10,qrbox:{width:240,height:240}},onDecoded,function(){}).then(function(){scanning=true;},function(e2){scanFail(e2);});
-      }else{ scanFail(e); }
-    });
+    if(!html5Qr) html5Qr=new Html5Qrcode('qr-reader');
+    html5Qr.start({facingMode:'environment'},{fps:10,qrbox:{width:240,height:240}},function(text){
+      addRecord(text,'正常','');
+      if(scanning) closeScanner();
+    },function(){}).catch(function(e){ scanFail(e); });
+    scanning=true;
   }
   function scanFail(e){
-    var msg=(e&&e.message)?e.message:(''+e);
-    var reason=msg.indexOf('NotFound')>-1?'未找到摄像头':((msg.indexOf('NotAllowed')>-1||msg.indexOf('Permission')>-1)?'请允许摄像头权限；若已允许仍失败，请确认通过 HTTPS 访问（http 内网地址会被浏览器拦截）':'设备不支持');
-    toast('无法启动摄像头：'+reason);
+    toast('无法启动摄像头：'+(e==='NotFoundError'?'未找到摄像头':(e==='NotAllowedError'?'请允许摄像头权限':'设备不支持')));
     closeScanner();
   }
   document.getElementById('closeScan').addEventListener('click',closeScanner);
@@ -362,10 +268,11 @@ var o=[];var l=Array.isArray(e);for(f=n.s.c;f<=n.e.c;++f)s[f]=ya(f);for(var c=n.
 
   document.getElementById('clearBtn').addEventListener('click',function(){
     if(!records.length){ toast('已无记录'); return; }
-    if(confirm('确定清空所有共享点检记录？（所有人都会看到清空）')){ clearRemote(); }
+    if(confirm('确定清空本次所有点检记录？')){ records=[]; save(); render(); toast('已清空'); fetch(PROXY+'/records',{method:'DELETE'}).catch(function(){}); }
   });
 
   render();
+  loadRemote();
 })();
 </script>
 </body>
